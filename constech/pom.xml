@@ -12,7 +12,7 @@
 	<artifactId>constech</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>constech</name>
-	<description>Spring boot Constech</description>
+	<description>Spring Boot Constech</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
