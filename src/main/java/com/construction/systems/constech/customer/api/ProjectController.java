@@ -17,8 +17,7 @@ public class ProjectController {
 
     private final ProjectService projectService;
 
-    private final EngineerService engineerService;
-
+ 
     @PostMapping
     public Project save(@RequestBody Project project) {
         return projectService.save(project);
