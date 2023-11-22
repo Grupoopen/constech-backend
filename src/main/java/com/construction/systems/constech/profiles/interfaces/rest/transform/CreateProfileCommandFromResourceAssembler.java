@@ -1,7 +1,7 @@
-package com.acme.learning.platform.profiles.interfaces.rest.transform;
+package com.construction.systems.constech.profiles.interfaces.rest.transform;
 
-import com.acme.learning.platform.profiles.domain.model.commands.CreateProfileCommand;
-import com.acme.learning.platform.profiles.interfaces.rest.resources.CreateProfileResource;
+import com.construction.systems.constech.profiles.domain.model.commands.CreateProfileCommand;
+import com.construction.systems.constech.profiles.interfaces.rest.resources.CreateProfileResource;
 
 /**
  * CreateProfileCommandFromResourceAssembler

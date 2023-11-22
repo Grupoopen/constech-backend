@@ -1,7 +1,7 @@
-package com.acme.learning.platform.profiles.interfaces.rest.transform;
+package com.construction.systems.constech.profiles.interfaces.rest.transform;
 
-import com.acme.learning.platform.profiles.domain.model.aggregates.Profile;
-import com.acme.learning.platform.profiles.interfaces.rest.resources.ProfileResource;
+import com.construction.systems.constech.profiles.domain.model.aggregates.Profile;
+import com.construction.systems.constech.profiles.interfaces.rest.resources.ProfileResource;
 
 public class ProfileResourceFromEntityAssembler {
     public static ProfileResource toResourceFromEntity(Profile profile) {
