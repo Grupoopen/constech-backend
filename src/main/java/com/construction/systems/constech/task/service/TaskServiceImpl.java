@@ -38,12 +38,6 @@ public class TaskServiceImpl implements TaskService {
 
     @Transactional
     @Override
-    public Task update(Task student) {
-        return null;
-    }
-
-    @Transactional
-    @Override
     public boolean deleteById(Integer id) {
         if (taskRepository.existsById(id)) { // cuando la respuesta de busqueda es un solo elemento
             taskRepository.deleteById(id);
@@ -77,6 +71,32 @@ public class TaskServiceImpl implements TaskService {
             return optionalTask.get();
         }
         throw  new RuntimeException("No esta el asignado a buscar");
+    }
+
+    @Override
+    public Task update(Integer id, Task request) {
+        // Paso 1: Validar la Tarea Actualizada
+        Set<ConstraintViolation<Task>> violations = validator.validate(request);
+        if (!violations.isEmpty()) {
+            throw new ResourceValidationException("Task", violations);
+        }
+
+        // Paso 2: Buscar y Actualizar la Tarea Existente
+        Task updatedTask = taskRepository.findById(id)
+                .map(existingTask -> {
+                    existingTask.setAssigned(request.getAssigned());
+                    existingTask.setTitle(request.getTitle());
+                    existingTask.setDescription(request.getDescription());
+                    existingTask.setStatus(request.getStatus());
+                    existingTask.setInitialDate(request.getInitialDate());
+                    existingTask.setDeadline(request.getDeadline());
+                    // Puedes continuar actualizando otros atributos según sea necesario
+                    return taskRepository.save(existingTask);
+                })
+                .orElseThrow(() -> new FetchIdNotFoundException("Task", id));
+
+        // Paso 3: Retornar la Tarea Actualizada
+        return updatedTask;
     }
 }
 
