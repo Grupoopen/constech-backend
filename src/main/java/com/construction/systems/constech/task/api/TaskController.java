@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("tasks")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"Content-Type", "Authorization"},methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"Content-Type", "Authorization"},methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE,RequestMethod.PUT})
 public class TaskController {
     private final TaskService taskService;
 
@@ -68,6 +68,12 @@ public class TaskController {
             return ResponseEntity.noContent().build();
         }
         throw new InternalServerErrorException("Student", "id", String.valueOf(id), "deleted");
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<TaskResource> update(@PathVariable("id") Integer id, @RequestBody Task request) {
+        Task updatedTask = taskService.update(id, request);
+        return ResponseEntity.ok(taskMapper.toResource(updatedTask));
     }
 
     @GetMapping("title/{title}")

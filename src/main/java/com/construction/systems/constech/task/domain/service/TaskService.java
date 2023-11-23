@@ -14,7 +14,7 @@ public interface TaskService {
 
     Task fetchByAssigned(String assigned);
 
-    Task update(Task student);
+    Task update(Integer id,Task task);
 
     boolean deleteById(Integer id);
 }

@@ -36,11 +36,6 @@ public class TaskServiceImpl implements TaskService {
         throw new ResourceValidationException("Task", violations);
     }
 
-    @Transactional
-    @Override
-    public Task update(Task student) {
-        return null;
-    }
 
     @Transactional
     @Override
@@ -77,6 +72,32 @@ public class TaskServiceImpl implements TaskService {
             return optionalTask.get();
         }
         throw  new RuntimeException("No esta el asignado a buscar");
+    }
+
+    @Transactional
+    @Override
+    public Task update(Integer id, Task request) {
+
+        Set<ConstraintViolation<Task>> violations = validator.validate(request);
+        if (!violations.isEmpty()) {
+            throw new ResourceValidationException("Task", violations);
+        }
+
+
+        Task updatedTask = taskRepository.findById(id)
+                .map(existingTask -> {
+                    existingTask.setAssigned(request.getAssigned());
+                    existingTask.setTitle(request.getTitle());
+                    existingTask.setDescription(request.getDescription());
+                    existingTask.setStatus(request.getStatus());
+                    existingTask.setInitialDate(request.getInitialDate());
+                    existingTask.setDeadline(request.getDeadline());
+                    return taskRepository.save(existingTask);
+                })
+                .orElseThrow(() -> new FetchIdNotFoundException("Task", id));
+
+
+        return updatedTask;
     }
 }
 
