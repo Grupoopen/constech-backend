@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Tag(name = "tasks", description = "Everything about your Tasks")
+@Tag(name = "Tasks", description = "Everything about your Tasks")
 @AllArgsConstructor
 @RestController
 @RequestMapping("tasks")
@@ -57,11 +57,57 @@ public class TaskController {
                 HttpStatus.CREATED);
     }
 
+    @Operation(
+            summary = "Get tasks to the constech" ,
+            description = "Get tasks to the constech",
+            operationId = "getTask",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Successful operation",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = TaskResource.class)
+                            )
+                    ),
+                    @ApiResponse (
+                            responseCode = "400",
+                            description = "Bad Request",
+                            content = @Content (
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = RuntimeException.class)
+                            )
+                    )
+            }
+    )
     @GetMapping
     public List<Task> fetchAll() {
         return taskService.fetchAll();
     }
 
+    @Operation(
+            summary = "Delete tasks to the constech" ,
+            description = "Delete tasks to the constech",
+            operationId = "deleteTask",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Successful operation",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = TaskResource.class)
+                            )
+                    ),
+                    @ApiResponse (
+                            responseCode = "400",
+                            description = "Bad Request",
+                            content = @Content (
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = RuntimeException.class)
+                            )
+                    )
+            }
+    )
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Integer id) {
         if (taskService.deleteById(id)) {
@@ -70,6 +116,29 @@ public class TaskController {
         throw new InternalServerErrorException("Student", "id", String.valueOf(id), "deleted");
     }
 
+    @Operation(
+            summary = "Put tasks to the constech" ,
+            description = "Put tasks to the constech",
+            operationId = "putTask",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Successful operation",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = TaskResource.class)
+                            )
+                    ),
+                    @ApiResponse (
+                            responseCode = "400",
+                            description = "Bad Request",
+                            content = @Content (
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = RuntimeException.class)
+                            )
+                    )
+            }
+    )
     @PutMapping("{id}")
     public ResponseEntity<TaskResource> update(@PathVariable("id") Integer id, @RequestBody Task request) {
         Task updatedTask = taskService.update(id, request);
