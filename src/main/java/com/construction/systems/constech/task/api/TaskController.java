@@ -6,13 +6,18 @@ import com.construction.systems.constech.task.domain.service.TaskService;
 import com.construction.systems.constech.task.mapping.TaskMapper;
 import com.construction.systems.constech.task.resource.CreateTaskResource;
 import com.construction.systems.constech.task.resource.TaskResource;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Tag(name = "tasks", description = "Everything about your Tasks")
 @AllArgsConstructor
 @RestController
 @RequestMapping("tasks")
@@ -22,6 +27,29 @@ public class TaskController {
 
     private final TaskMapper taskMapper;
 
+    @Operation(
+            summary = "Add a new task to the constech" ,
+            description = "Add a new task to the constech",
+            operationId = "addTask",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Successful operation",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = TaskResource.class)
+                            )
+                    ),
+                    @ApiResponse (
+                            responseCode = "400",
+                            description = "Bad Request",
+                            content = @Content (
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = RuntimeException.class)
+                            )
+                    )
+            }
+    )
     @PostMapping
     public ResponseEntity<TaskResource> save(@RequestBody CreateTaskResource task) {
         return new ResponseEntity<>(
