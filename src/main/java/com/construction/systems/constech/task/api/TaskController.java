@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("tasks")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"Content-Type", "Authorization"},methods = {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"Content-Type", "Authorization"},methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
 public class TaskController {
     private final TaskService taskService;
 
