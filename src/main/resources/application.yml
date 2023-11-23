@@ -24,8 +24,8 @@ spring:
 
 documentation:
     application:
-        description: @project.description@
-        version: @project.version@
+        description: project.description@
+        version: project.version@
 
 pringdoc:
     # Contract endpoint: http://localhost:8040/v3/api-docs
