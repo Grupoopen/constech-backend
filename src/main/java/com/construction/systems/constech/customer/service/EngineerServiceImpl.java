@@ -1,7 +1,7 @@
 package com.construction.systems.constech.customer.service;
 
 import com.construction.systems.constech.customer.domain.model.entities.Engineer;
-import com.construction.systems.constech.customer.domain.model.entities.Project;
+
 import com.construction.systems.constech.customer.domain.persistence.EngineerRepository;
 import com.construction.systems.constech.customer.domain.service.EngineerService;
 import lombok.AllArgsConstructor;
