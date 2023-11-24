@@ -17,10 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Tag(name = "Companys", description = "Everything about your Companys")
+@Tag(name = "Companies", description = "Everything about your Companies")
 @AllArgsConstructor
 @RestController
-@RequestMapping("Companys")
+@RequestMapping("Companies")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"Content-Type", "Authorization"},methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE,RequestMethod.PUT})
 public class CompanyController {
     private final CompanyService CompanyService;
@@ -51,15 +51,15 @@ public class CompanyController {
             }
     )
     @PostMapping
-    public ResponseEntity<CompanyResource> save(@RequestBody CreateCompanyResource Company) {
+    public ResponseEntity<CompanyResource> save(@RequestBody CreateCompanyResource company) {
         return new ResponseEntity<>(
-                CompanyMapper.toResource(CompanyService.save(CompanyMapper.toEntity(Company))),
+                CompanyMapper.toResource(CompanyService.save(CompanyMapper.toEntity(company))),
                 HttpStatus.CREATED);
     }
 
     @Operation(
-            summary = "Get Companys to the constech" ,
-            description = "Get Companys to the constech",
+            summary = "Get Companies to the constech" ,
+            description = "Get Companies to the constech",
             operationId = "getCompany",
             responses = {
                     @ApiResponse(
@@ -86,8 +86,8 @@ public class CompanyController {
     }
 
     @Operation(
-            summary = "Delete Companys to the constech" ,
-            description = "Delete Companys to the constech",
+            summary = "Delete Company from the constech" ,
+            description = "Delete Company from the constech",
             operationId = "deleteCompany",
             responses = {
                     @ApiResponse(
@@ -117,8 +117,8 @@ public class CompanyController {
     }
 
     @Operation(
-            summary = "Put Companys to the constech" ,
-            description = "Put Companys to the constech",
+            summary = "Put Company to the constech" ,
+            description = "Put Company to the constech",
             operationId = "putCompany",
             responses = {
                     @ApiResponse(
@@ -145,15 +145,15 @@ public class CompanyController {
         return ResponseEntity.ok(CompanyMapper.toResource(updatedCompany));
     }
 
-    @GetMapping("title/{title}")
-    public ResponseEntity<CompanyResource> fetchTitle(@PathVariable("title") String title){
+    @GetMapping("ruc/{ruc}")
+    public ResponseEntity<CompanyResource> fetchRuc(@PathVariable("companyName") String ruc){
         return ResponseEntity.ok(
-                CompanyMapper.toResource(CompanyService.fetchByTitle(title)));
+                CompanyMapper.toResource(CompanyService.fetchByRuc(ruc)));
     }
 
 
-    @GetMapping("assigned/{assigned}")
-    public ResponseEntity<Company> fetchAsssigned(@PathVariable("assigned") String assigned){
-        return ResponseEntity.ok(CompanyService.fetchByTitle(assigned));
+    @GetMapping("companyName/{companyName}")
+    public ResponseEntity<Company> fetchCompanyName(@PathVariable("companyName") String companyName){
+        return ResponseEntity.ok(CompanyService.fetchByCompanyName(companyName));
     }
 }

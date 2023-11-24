@@ -10,11 +10,11 @@ public interface CompanyService {
     Company save(Company company);
     List<Company> fetchAll();
 
-    Company fetchByTitle(String title);
-
-    Company fetchByAssigned(String assigned);
+    Company fetchByCompanyName(String companyName);
 
     Company update(Integer id,Company company);
 
     boolean deleteById(Integer id);
+    
+    Company fetchByRuc(String ruc);
 }

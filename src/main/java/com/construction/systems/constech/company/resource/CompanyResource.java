@@ -9,10 +9,11 @@ import lombok.*;
 @NoArgsConstructor
 public class CompanyResource {
     private Integer id;
-    private String assigned;
-    private String title;
+    private String ruc;
+    private String companyName;
     private String description;
-    private String status;
-    private String initialDate;
-    private String deadline;
+    private String ceo;
+    private String address;
+    private String contactMail;
+    private String contactNumber;
 }

@@ -56,18 +56,18 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Transactional(readOnly = true)
     @Override
-    public Company fetchByTitle(String title) {
-        Optional<Company> optionalCompany = companyRepository.findByTitle(title);
+    public Company fetchByCompanyName(String companyName) {
+        Optional<Company> optionalCompany = companyRepository.findByCompanyName(companyName);
         if(optionalCompany.isPresent()){
             return optionalCompany.get();
         }
-        throw  new ResourceNotFoundException("Company", "title", title);
+        throw  new ResourceNotFoundException("Company", "title", companyName);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Company fetchByAssigned(String assigned) {
-        Optional<Company> optionalCompany = companyRepository.findByAssigned(assigned);
+    public Company fetchByRuc(String ruc) {
+        Optional<Company> optionalCompany = companyRepository.findByRuc(ruc);
         if(optionalCompany.isPresent()){
             return optionalCompany.get();
         }
@@ -86,12 +86,13 @@ public class CompanyServiceImpl implements CompanyService {
 
         Company updatedCompany = companyRepository.findById(id)
                 .map(existingCompany -> {
-                    existingCompany.setAssigned(request.getAssigned());
-                    existingCompany.setTitle(request.getTitle());
+                    existingCompany.setRuc(request.getRuc());
+                    existingCompany.setCompanyName(request.getCompanyName());
                     existingCompany.setDescription(request.getDescription());
-                    existingCompany.setStatus(request.getStatus());
-                    existingCompany.setInitialDate(request.getInitialDate());
-                    existingCompany.setDeadline(request.getDeadline());
+                    existingCompany.setCeo(request.getCeo());
+                    existingCompany.setAddress(request.getAddress());
+                    existingCompany.setContactMail(request.getContactMail());
+                    existingCompany.setContactNumber(request.getContactNumber());
                     return companyRepository.save(existingCompany);
                 })
                 .orElseThrow(() -> new FetchIdNotFoundException("Company", id));
