@@ -5,11 +5,13 @@ import com.construction.systems.constech.customer.domain.model.entities.Project;
 import com.construction.systems.constech.customer.domain.service.EngineerService;
 import com.construction.systems.constech.customer.domain.service.ProjectService;
 import com.construction.systems.constech.shared.exception.InternalServerErrorException;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@Tag(name = "Projects", description = "Everything about your projects")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/projects")
