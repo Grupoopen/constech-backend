@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,9 +54,15 @@ public class TaskController {
             }
     )
     @PostMapping
-    public ResponseEntity<TaskResource> save(@RequestBody CreateTaskResource task) {
+    public ResponseEntity<TaskResource> save(@RequestBody CreateTaskResource assigned) {
+        if (taskService.existsByAssigned(assigned.getAssigned())) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Task with the same assigned already exists.");
+        }
+
         return new ResponseEntity<>(
-                taskMapper.toResource(taskService.save(taskMapper.toEntity(task))),
+                taskMapper.toResource(taskService.save(taskMapper.toEntity(assigned))),
                 HttpStatus.CREATED);
     }
 

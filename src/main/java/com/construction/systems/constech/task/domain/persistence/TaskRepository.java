@@ -14,4 +14,6 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 
     Optional<Task> findByAssigned(String assigned);
 
+    boolean existsByAssigned(String assigned);
+
 }

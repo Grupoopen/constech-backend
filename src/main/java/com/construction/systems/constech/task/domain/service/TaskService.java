@@ -17,4 +17,6 @@ public interface TaskService {
     Task update(Integer id,Task task);
 
     boolean deleteById(Integer id);
+
+    boolean existsByAssigned(String assigned);
 }

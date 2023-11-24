@@ -99,5 +99,10 @@ public class TaskServiceImpl implements TaskService {
 
         return updatedTask;
     }
+
+    @Override
+    public boolean existsByAssigned(String assigned) {
+        return taskRepository.existsByAssigned(assigned);
+    }
 }
 
