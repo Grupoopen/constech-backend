@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Tag(name = "Tasks", description = "Everything about your Tasks")
 @AllArgsConstructor
 @RestController
@@ -146,14 +148,18 @@ public class TaskController {
     }
 
     @GetMapping("title/{title}")
-    public ResponseEntity<TaskResource> fetchTitle(@PathVariable("title") String title){
-        return ResponseEntity.ok(
-                taskMapper.toResource(taskService.fetchByTitle(title)));
+    public ResponseEntity<List<TaskResource>> fetchTitle(@PathVariable("title") String title){
+        List<Task> tasks = taskService.fetchByTitle(title);
+        List<TaskResource> taskResources = tasks.stream()
+                .map(taskMapper::toResource)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(taskResources);
     }
 
 
     @GetMapping("assigned/{assigned}")
     public ResponseEntity<Task> fetchAsssigned(@PathVariable("assigned") String assigned){
-        return ResponseEntity.ok(taskService.fetchByTitle(assigned));
+        return ResponseEntity.ok(taskService.fetchByAssigned(assigned));
     }
 }

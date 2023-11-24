@@ -56,12 +56,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Transactional(readOnly = true)
     @Override
-    public Task fetchByTitle(String title) {
-        Optional<Task> optionalTask = taskRepository.findByTitle(title);
-        if(optionalTask.isPresent()){
-            return optionalTask.get();
+    public List<Task> fetchByTitle(String title) {
+        List<Task> tasks = taskRepository.findByTitle(title);
+        if (!tasks.isEmpty()) {
+            return tasks;
         }
-        throw  new ResourceNotFoundException("Task", "title", title);
+        throw new ResourceNotFoundException("Task", "title", title);
     }
 
     @Transactional(readOnly = true)

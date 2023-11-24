@@ -10,7 +10,7 @@ public interface TaskService {
     Task save(Task task);
     List<Task> fetchAll();
 
-    Task fetchByTitle(String title);
+    List<Task> fetchByTitle(String title);
 
     Task fetchByAssigned(String assigned);
 
