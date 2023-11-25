@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -15,28 +14,50 @@ import java.util.List;
 @Table(name="engineers")
 public class Engineer {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotBlank
-    @Size(min=2,max=50)
-    @Column(name="first_name",length = 50,nullable = false)
+    @Size(min=2, max=50)
+    @Column(name="first_name", length = 50, nullable = false)
     private String  firstName;
 
-    @Column(name="last_name",length = 50,nullable = false)
+    @NotBlank
+    @Size(min=2, max=50)
+    @Column(name="last_name", length = 50, nullable = false)
     private String lastName;
 
-    @Column(name="dni",length = 50,nullable = false)
+    @NotBlank
+    @Size(min=2, max=50)
+    @Column(name="dni", length = 50, nullable = false)
     private String dni;
 
-    @Column(name="age",length = 50,nullable = false)
+    @NotBlank
+    @Size(min=2, max=50)
+    @Column(name="age", length = 50, nullable = false)
     private String age;
-/*
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="project_id")
-    private   Project project;*/
 
+    @Column(name="email", length = 255)
+    private String email;
+
+    @Column(name="dob")
+    @Temporal(TemporalType.DATE)
+    private Date dob;
+
+    @Column(name="gender", length = 10)
+    private String gender;
+
+    @Column(name="education", length = 50)
+    private String education;
+
+    @Column(name="company", length = 100)
+    private String company;
+
+    @Column(name="experience")
+    private Integer experience;
+
+    @Column(name="package_amount")
+    private Double packageAmount;
 
 }
