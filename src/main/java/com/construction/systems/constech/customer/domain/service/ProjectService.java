@@ -9,4 +9,9 @@ public interface ProjectService {
 
     List<Project>fetchAll();
     boolean deleteById(Integer id);
+
+    Project getProjectById(Integer id);
+    Project updateProject(Integer id, Project updatedProject);
+
+    List<Project> getProjectsByStatus(String status);
 }
