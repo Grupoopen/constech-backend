@@ -17,10 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Tag(name = "Companies", description = "Everything about your Companies")
+@Tag(name = "companies", description = "Everything about your Companies")
 @AllArgsConstructor
 @RestController
-@RequestMapping("Companies")
+@RequestMapping("companies")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = {"Content-Type", "Authorization"},methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE,RequestMethod.PUT})
 public class CompanyController {
     private final CompanyService CompanyService;
