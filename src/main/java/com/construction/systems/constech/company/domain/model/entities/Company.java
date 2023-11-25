@@ -42,13 +42,13 @@ public class Company {
 
     @NotNull
     @NotBlank
-    @Size(min = 20, max = 100)
+    @Size(min = 2, max = 100)
     @Column(name="address", length = 100, nullable = false)
     private String address;
 
     @NotNull
     @NotBlank
-    @Size(min = 20, max = 50)
+    @Size(min = 2, max = 50)
     @Column(name="contactMail", length = 50, nullable = false)
     private String contactMail;
 

@@ -37,12 +37,12 @@ public class CreateCompanyResource {
 
     @NotNull
     @NotBlank
-    @Size(min = 20, max = 100)
+    @Size(min = 2, max = 100)
     private String address;
 
     @NotNull
     @NotBlank
-    @Size(min = 20, max = 50)
+    @Size(min = 2, max = 50)
     private String contactMail;
 
     @NotNull
